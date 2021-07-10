@@ -1,0 +1,64 @@
+/** TABLE OF CONTENTS
+ — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — /
+1 — Global Styles
+2 — Layout
+2.1 — Header
+2.2 — Menu
+3 — Page Specific CSS
+3.1 — Loading
+4 — Forms
+5 — Admin Branding
+5.1 — Admin Bar
+5.2 — Builder Styles
+— — — — — — — — — — — — — — — — — — — — — — — — — — — — — — /
+/// END TABLE OF CONTENTS **/
+
+@import "./module/variable";
+
+/** 1 - Global Styles
+------------------------------------------------------------*/
+html {
+  background-color: $dark;
+  font-family: sans-serif;
+  // background-color: white;
+  color: #f4f4f4;
+  .app-container {
+    font-size: 20px;
+    @extend html;
+    padding-top: 100px;
+    // background-color: black;
+  }
+}
+
+/** 2 - Layout
+------------------------------------------------------------*/
+/* =========================
+2.1 - Header
+========================= */
+
+/* =========================
+2.2 - Menu
+========================= */
+.user-nav {
+  color: $light-blue;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+/** 3 - Page Specific CSS
+------------------------------------------------------------*/
+/* =========================
+3.1 - Loading
+========================= */
+#loader {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+/** 4 - Forms
+------------------------------------------------------------*/
+.game-form {
+  input {
+    margin-top: 5px;
+  }
+}

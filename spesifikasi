@@ -1,0 +1,46 @@
+Spesifikasi Tugas
+
+Membuat contract ethereum blockchain dengan spesifikasi berikut:
+    - Menerima input pengguna berupa nama dan disimpan.
+    - Memiliki sejumlah data permainan yang terdiri dari nama, tahun release, dan harga.
+    - Membeli sebuah permainan dengan gas (sesuai harga).
+    - Mengecek apakah suatu pengguna telah membeli game tertentu.
+    - Menampilkan nama pengguna yang telah membeli >= 5 game (top buyer).
+    - Menampilkan nama game yang telah dibeli >= 5 game (top seller games).
+    - Jangan lupa di-optimize.
+    - Membuat frontend server dengan spesifikasi berikut:
+    - Menggunakan framework javascript (React/Vue/Angular/Svelte).
+    - Meng-consume smart contract yang telah Anda buat di atas.
+    - Melakukan registrasi pengguna menggunakan user address (dari Web3) dan nama-nya.
+    - Menampilkan list permainan (termasuk datanya) dan statusnya apakah sudah dibeli.
+    - Dapat membeli permainan dengan gas.
+    - Menampilkan game yang dimiliki pengguna.
+    - Menampilkan top seller games dan top buyers.
+
+Batasan:
+    - Gunakan test network agar gratis.
+    - Harus lengkap, ada frontend dan backend-nya.
+    - Hanya diperbolehkan menggunakan Yul untuk pembuatan blockchain.
+    - Untuk smart contract, Anda tidak boleh menggunakan library apa pun.
+    - Untuk frontend, Anda boleh menggunakan library apa pun.
+    - Boleh membuat web service untuk melakukan operasi tambahan yang tidak dituliskan pada spesifikasi smart contract.
+    - Pastikan business logic terpenuhi, misalkan pengguna hanya dapat membeli suatu permainan yang belum dibelinya.
+    - Dilarang melakukan decompiling atau compiling ke Yul.
+    - Pelanggaran terhadap batasan menyebabkan pengurangan nilai hingga 0.
+
+Bonus:
+    - [0.5 poin] UI yang menarik.
+    - [0.5 poin] Menambahkan permission untuk menampilkan top buyers (hanya Admin yang dapat melakukan ini). Selain itu, nama pengguna merupakan data sensitif, pastikan tidak dapat ditampilkan oleh siapa pun kecuali Admin. Hint: gunakan asymmetric cryptosystem.
+    - [0.5 poin] Pembelian game dapat berupa redeemable token yang dapat di-redeem pada platform game seperti Steam. Selain itu, pastikan redeemable token hanya berlaku untuk 1 akun dan tidak dapat di-craft oleh pihak lain.
+    - [1 poin] Ada pengguna yang berlaku sebagai seller game (pada smart contract):
+    - ada toko dan bisa add/delete game dalam toko (max 1 toko per pengguna)
+    - terdapat pajak yang diambil dari penjualan (bebas persentasenya)
+    - menampilkan semua game yang dijual
+    - mengambil uang dari penjualan game
+
+Video yang Dikumpulkan
+    - Buatlah sebuah video yang menunjukkan:
+    - Penjelasan setiap operasi pada smart contract.
+    - Mencantumkan testnet yang digunakan dan contract address.
+    - Benchmarking antara smart contract Yul yang Anda buat dengan smart contract Solidity.
+    - Menunjukkan pemenuhan spesifikasi (termasuk bonus jika ada) dengan batasan-batasan di atas.
