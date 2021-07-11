@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
-import { Container } from 'react-bootstrap';
+import React, { Component, useState } from 'react';
+import { Container, Row, Card } from 'react-bootstrap';
 
 
-export default function Landing() {
+export default function Landing(props) {
     return (
-        <div>
-            <Container>
-                Hello
-            </Container>
-        </div>
+        <Container>
+            <div>
+                <ul>
+                  {props.games.map(game => (
+                    <li key={game.id}>{game.title}</li>
+                  ))}
+                </ul>
+          </div>
+        </Container>
     );
 }

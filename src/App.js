@@ -7,8 +7,13 @@ import Store from './pages/store/Store';
 import User from './pages/user/User';
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import GameCard from './pages/games/GameCard';
+import { Link, Route, Switch } from "wouter";
 // import { render } from '@testing-library/react';
 
+//Declare IPFS
+const ipfsClient = require('ipfs-http-client')
+const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' }) // leaving out the arguments will default to these values
 
 class App extends Component {
   
@@ -38,40 +43,75 @@ class App extends Component {
 
     // Get network ID
     const networkId = await web3.eth.net.getId()
+    // alert(networkId)
     const networkData = GameStore.networks[networkId]
+    console.log(networkData)
     this.setState({ loading: false })
     
     if (networkData) { // Get address
+      // alert('a')
       const gamestore = new web3.eth.Contract(GameStore.abi, networkData.address)
       this.setState({ gamestore })
-      const gameCount = await gamestore.methods.gameCount().call() 
+      // console.log('gamestore')
+      // console.log(gamestore)
+      const gamesCount = await gamestore.methods.gameCount().call()
+      console.log('gameCount')
+      console.log(gamesCount)
 
       // fetch
-      for (var i = 1; i <= gameCount; i++) {
-        const game = await gamestore.games(i)
-        const gameId = game[0].toNumber()
-        const gameTitle = game[1]
-        const gameYear = game[2]
-        const gamePrice = game[3]
-        // const storeId = game[4]
+      this.setState({ gamesCount })
+      // Title, Year, Price
+      // const game1 = await gamestore.methods.createGame("Elder Scroll VI", 2042, 1).call()
+      // const game2 = await gamestore.methods.createGame("Cyberbug", 2077, 2).call()
+      // const game3 = await gamestore.methods.createGame("GTA VI", 2025, 2).call()
+      // const game4 = await gamestore.methods.createGame("DOTA 3", 2069, 2).call()
+
+      console.log('fetch game')
+      // fetch game
+      for (var i = 1; i <= gamesCount; i++) {
+        const game = await gamestore.methods.games(i).call()
+        console.log('ini game')
+        console.log(game)
+        this.setState({
+          games: [...this.state.games, game]
+        })
+
       }
+      console.log('state games')
+      console.log(this.state.games)
+
+      this.setState({ loading: false})
+
     } else {
       alert('Unable to find network')
     }
   }
 
-  // Handle submit
-  captureFile = event => {
-    event.preventDefault()
-    const file = event.target.files[0]
-    const reader = new window.FileReader()
-    reader.readAsArrayBuffer(file)
-
-    reader.onloadend = () => {
-      this.setState({ buffer: Buffer(reader.result) })
-      console.log('buffer', this.state.buffer)
-    }
+  // Start
+  uploadGame(title, year, price) {
+    this.setState({ loading:true })
+    this.state.gamestore.methods.createGame('Elder Scroll VI', '2042', '1').call()
+    this.setState({ loading:false })
   }
+
+  // tipImageOwner(id, tipAmount) {
+  //   this.setState({ loading: true })
+  //   this.state.decentragram.methods.tipImageOwner(id).send({ from: this.state.account, value: tipAmount }).on('transactionHash', (hash) => {
+  //     this.setState({ loading: false })
+  //   })
+  // }
+
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  // End
 
   constructor(props) {
     super(props)
@@ -79,16 +119,42 @@ class App extends Component {
       account: '',
       gamestore: null,
       gamesOwned: [],
-      loading : true
+      loading : true,
+      value : '',
+      games : []
     }
+    console.log('a')
+    console.log(this.state.games)
+    this.uploadGame = this.uploadGame.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  
+
   render() {
+  
     return (
       <div>
         <Navbar account={this.state.account} />
         <div className="app-container">
-        { this.state.loading ? <div id="loader" className="text-center mt-5"> Loading... </div> : <Store /> }
+
+          {/* <div>
+            <ul>
+              {this.state.games.map(game => (
+                <li key={game.id}>{game.title}</li>
+              ))}
+            </ul>
+              </div> */}
+
+        { this.state.loading ? <div id="loader" className="text-center mt-5"> Loading... </div>      
+        : <Landing 
+            games={this.state.games}
+            uploadGame={this.uploadGame}
+            handleChange = {this.handleChange}
+            handleSubmit = {this.handleSubmit} 
+            /> 
+        }
 
         </div>
 

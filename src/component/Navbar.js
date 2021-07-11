@@ -21,27 +21,6 @@ class Navbar extends Component {
               <button className="nav-link user-nav" disabled> { this.props.account } </button>
             </li>
           </ul>
-          {/*
-          <ul className="navbar-nav px-3">
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-            <li className="nav-item text-nowrap d-none d-sm-none d-sm-block">
-              <small className="text-secondary">
-                <small id="account">{'0x0'}</small>
-              </small>
-              { this.props.account
-                ? <img
-                  className='ml-2'
-                  width='30'
-                  height='30'
-                  // src={`data:image/png;base64,${new Identicon(this.props.account, 30).toString()}`}
-                  src="#"
-                />
-                : <span></span>
-              }
-            </li>
-          </ul> */}
         </nav>
       );
     }
